@@ -17,9 +17,9 @@
             <ul class="list cat-list">
                 @foreach ($categories as $category)
                     <li>
-                        <a href="{{ route('front.blogs',$category->id) }}" class="d-flex">
+                        <a href="{{ route('front.blogs', $category->id) }}" class="d-flex">
                             <p>{!! $category->getTranslation('title', app()->getLocale()) !!}</p>
-                            <p>({{$category->blog()->count()}})</p>
+                            <p>({{ $category->blog()->count() }})</p>
                         </a>
                     </li>
                 @endforeach
@@ -29,30 +29,12 @@
         <aside class="single_sidebar_widget tag_cloud_widget">
             <h4 class="widget_title" style="color: #2d2d2d;">Tag Clouds</h4>
             <ul class="list">
-                <li>
-                    <a href="#">project</a>
-                </li>
-                <li>
-                    <a href="#">love</a>
-                </li>
-                <li>
-                    <a href="#">technology</a>
-                </li>
-                <li>
-                    <a href="#">travel</a>
-                </li>
-                <li>
-                    <a href="#">restaurant</a>
-                </li>
-                <li>
-                    <a href="#">life style</a>
-                </li>
-                <li>
-                    <a href="#">design</a>
-                </li>
-                <li>
-                    <a href="#">illustration</a>
-                </li>
+                @foreach ($tags as $tag)
+                    <li>
+                        <a href="{{route('front.blogtags',$tag->slug)}}">{!!$tag->name!!}</a>
+                    </li>
+                @endforeach
+
             </ul>
         </aside>
 

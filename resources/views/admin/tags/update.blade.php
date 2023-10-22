@@ -49,8 +49,8 @@
                                                         <div class="card-body">
                                                             <div class="form-group">
                                                                 <label class="mb-1">Slug</label>
-                                                                <textarea placeholder="Enter Slug" id="summernote-{{ $key }}" name="slug[{{ $key }}]"
-                                                                    class="mt-3 mb-3">{{ old('slug' . $key, $tag->getTranslation('slug', $key)) }}</textarea>
+                                                                <textarea placeholder="Enter Slug" id="#" name="slug[{{ $key }}]"
+                                                                    class="mt-3 mb-3 form-control">{{ old('slug' . $key, $tag->getTranslation('slug', $key)) }}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>

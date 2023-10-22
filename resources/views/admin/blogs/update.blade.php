@@ -48,15 +48,26 @@
                                                                 <textarea placeholder="Enter Description" id="summernote-{{ $key }}" name="desc[{{ $key }}]"
                                                                     class="mt-3 mb-3">{{ old('desc' . $key, $blog->getTranslation('desc', $key)) }}</textarea>
                                                             </div>
-                                                             <div class="form-group">
+                                                            <div class="form-group">
                                                                 <select name="category_id" class="form-control">
                                                                     @foreach ($categories as $category)
-                                                                        <option class="form-control"  value="{{$category->id}}">
-                                                                           {!! $category->getTranslation('title',$key) !!}
+                                                                        <option class="form-control"
+                                                                            value="{{ $category->id }}">
+                                                                            {!! $category->getTranslation('title', $key) !!}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                            <label for="countries">Tags</label>
+                                                            <select class="js-example-basic-multiple form-control"
+                                                                name="tag_id[]" multiple="multiple">
+                                                                @foreach ($tags as $tag)
+                                                                    <option
+                                                                        {{ in_array($tag->id, $blog->tags->pluck('id')->all() ?? []) ? 'selected' : '' }}
+                                                                        value="{{ $tag->id }}">
+                                                                        {!! $tag->getTranslation('name', $key) !!}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -66,16 +77,10 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="countries">Tags</label>
-                                    <select class="js-example-basic-multiple form-control" name="tag_id[]" multiple="multiple">
-                                         @foreach ($tags as $tag)
-                                        <option value="{{$tag->id}}"> {!! $tag->getTranslation('name', $key) !!}</option>
-                                         @endforeach
-                                    </select>
                                     <div class="form-group">
                                         <label for="exampleInputFile">Image</label>
                                         <div>
-                                            <img class="img-fluid" style="height: 390px"
+                                            <img class="img-fluid" style="height: 570px"
                                                 src="{{ asset('storage/' . $blog->image) }}">
                                         </div>
                                         <div class="input-group">

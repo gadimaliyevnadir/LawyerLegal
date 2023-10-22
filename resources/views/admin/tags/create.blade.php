@@ -43,7 +43,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="mb-1">Slug</label>
-                                                                <textarea placeholder="Enter Slug" id="summernote-{{ $key }}" name="slug[{{ $key }}]"
+                                                                <textarea placeholder="Enter Slug" id="#" name="slug[{{ $key }}]"
                                                                     class="mt-3 mb-3">{{ old('slug' . $key) }}</textarea>
                                                             </div>
                                                         </div>

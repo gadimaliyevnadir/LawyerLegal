@@ -16,17 +16,24 @@ use App\Models\Practice;
 use App\Models\Quote;
 use App\Models\Rightaligned;
 use App\Models\Slider;
+use App\Models\Tag;
 use App\Models\Textsample;
-use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
+    public function blogses($slug){
+        $locale = app()->getLocale();
+        $tag = Tag::with('blogs')->where("slug->{$locale}", 'like', '%' . $slug . '%')->first();
+        $blogs = $tag->blogs()->paginate(5);
+        $banners = Banner::query()->where('page', 'Blog')->get();
+        return view('front.blogs.index', compact('banners','blogs','tag'));
+    }
 
     public function blogs($id){
-         $blogs=Blog::with('tags')->where('category_id',$id)->paginate(5);
-        $blog = Blog::with('tags')->find(1);
+        $blogs=Blog::with('tags')->where('category_id',$id)->paginate(5);
         $banners = Banner::query()->where('page', 'Blog')->get();
-        return view('front.blogs.index', compact('banners','blog', 'blogs'));
+        return view('front.blogs.index', compact('banners', 'blogs'));
 
     }
 
@@ -51,9 +58,8 @@ class HomeController extends Controller
     }
     public function blog(){
         $blogs = Blog::paginate(5);
-        $blog = Blog::with('tags')->find(1);
         $banners = Banner::query()->where('page', 'Blog')->get();
-        return view('front.blogs.index',compact('banners','blog','blogs'));
+        return view('front.blogs.index',compact('banners','blogs'));
     }
     public function blogDetails(){
         $banners = Banner::query()->where('page', 'Blog_details')->get();

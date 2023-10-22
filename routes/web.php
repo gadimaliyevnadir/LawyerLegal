@@ -48,6 +48,7 @@ Route::group(['prefix'=>FacadesLaravelLocalization::setlocale(), 'as'=>'front.']
     Route::get('/blogDetails',[HomeController::class,'blogDetails'])->name('blogDetails');
     Route::get('/blogElements',[HomeController::class,'elements'])->name('elements');
     Route::get('/blogs/{id}',[HomeController::class,'blogs'])->name('blogs');
+    Route::get('/blogtags/{slug}',[HomeController::class,'blogses'])->name('blogtags');
 });
 
 

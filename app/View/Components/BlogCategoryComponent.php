@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Tag;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -24,7 +25,7 @@ class BlogCategoryComponent extends Component
     public function render(): View|Closure|string
     {
         $categories=Category::with('blog')->get();
-
-        return view('components.blog-category-component',compact('categories'));
+        $tags=Tag::all();
+        return view('components.blog-category-component',compact('categories','tags'));
     }
 }
