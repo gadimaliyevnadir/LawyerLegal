@@ -80,7 +80,7 @@ class BlogController extends Controller
             $data['image'] = $this->uploadFile($request->file('image'),'Blogs');
         }
         unset($data['tag_id']);
-        $update = Blog::update($data);
+        $update = $blog->update($data);
         if ($update) {
             $update->tags()->sync($request->tag_id);
         }
