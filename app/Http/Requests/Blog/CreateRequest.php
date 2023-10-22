@@ -19,6 +19,7 @@ class CreateRequest extends FormRequest
         return [
             'title' => 'required|array',
             'title.*' => 'required|string|min:3',
+            'tag_id'=>'required',
             'desc' => 'required|array',
             'desc.*' => 'required|string|min:3',
             'category_id'=>'numeric',

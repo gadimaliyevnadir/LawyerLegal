@@ -2,9 +2,9 @@
 @section('content')
     <section class="content">
         <div class="container-fluid vh-100">
-            <div class="row">
+            <div class="row w-100">
                 <!-- left column -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!-- general form elements -->
                     <div class="card card-primary">
                         @include('admin.layouts.includes.alert-message')
@@ -13,7 +13,7 @@
                         <form action="{{ route('admin.blogs.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-12 col-sm-12">
+                                <div class="col-12 col-sm-6">
                                     <div class="card card-primary card-tabs">
                                         <div class="card-header p-0 pt-1">
                                             <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
@@ -50,8 +50,9 @@
                                                             <div class="form-group">
                                                                 <select name="category_id" class="form-control">
                                                                     @foreach ($categories as $category)
-                                                                        <option class="form-control"  value="{{$category->id}}">
-                                                                           {!! $category->getTranslation('title',$key) !!}
+                                                                        <option class="form-control"
+                                                                            value="{{ $category->id }}">
+                                                                            {!! $category->getTranslation('title', $key) !!}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
@@ -65,7 +66,7 @@
                                         <!-- /.card -->
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-12">
+                                {{-- <div class="col-12 col-sm-12">
                                     <div class="card card-primary card-tabs">
                                         <div class="card-body">
                                             <div class="form-group">
@@ -85,15 +86,34 @@
                                         </div>
                                         <!-- /.card -->
                                     </div>
+                                </div> --}}
+                                <div class="col-sm-6">
+                                    <label for="countries">Tags</label>
+                                    <select class="js-example-basic-multiple form-control" name="tag_id[]" multiple="multiple">
+                                         @foreach ($tags as $tag)
+                                        <option value="{{$tag->id}}"> {!! $tag->getTranslation('name', $key) !!}</option>
+                                         @endforeach
+                                    </select>
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">File input</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" value="{{ old('image') }}" name="image"
+                                                    class="custom-file-input" id="exampleInputFile">
+                                                <label class="custom-file-label" for="exampleInputFile">Choose
+                                                    file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
-
-
-
                     </div>
                 </div>
             </div>

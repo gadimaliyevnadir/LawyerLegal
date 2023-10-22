@@ -213,10 +213,10 @@
   <script src="/admin/dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="/admin/dist/js/pages/dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
   <script type="text/javascript">
           $(document).ready(function() {
-
             $('.delete-form').on('submit', function(e) {
               e.preventDefault();
 
@@ -242,11 +242,6 @@
             $(function(){
                 $('#summernote-az').summernote()
                 $('#summernote-en').summernote()
-
-                CodeMirror.frontTextArea(document.getElementById('codeMirrorDemo'),{
-                    mode: "htmlmixed",
-                    theme: "monokai"
-                })
             })
         </script>
   <script>
@@ -263,7 +258,11 @@
           });
       }
     })
+ $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
   </script>
+
 </body>
 
 </html>

@@ -7,6 +7,7 @@ use App\Http\Requests\Blog\CreateRequest;
 use App\Http\Requests\Blog\UpdateRequest;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -29,9 +30,10 @@ class BlogController extends Controller
      */
     public function create()
     {
+        $tags=Tag::all();
         $categories=Category::all();
         $locales = LaravelLocalization::getSupportedLocales();
-        return view('admin.blogs.create',compact('locales', 'categories'));
+        return view('admin.blogs.create',compact('locales', 'categories','tags'));
     }
 
     /**
@@ -41,7 +43,11 @@ class BlogController extends Controller
     {
         $data = $request->validated();
         $data['image'] = $this->uploadFile($request->file('image'), 'Blogs');
-        Blog::create($data);
+        unset($data['tag_id']);
+        $create = Blog::create($data);
+        if($create){
+            $create->tags()->attach($request->tag_id);
+        }
         return redirect()->route('admin.blogs.index');
     }
 
@@ -59,8 +65,9 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $categories = Category::all();
+        $tags=Tag::all();
         $locales = LaravelLocalization::getSupportedLocales();
-        return view('admin.blogs.update',compact('blog','locales','categories'));
+        return view('admin.blogs.update',compact('blog','locales','categories','tags'));
     }
 
     /**
@@ -72,7 +79,11 @@ class BlogController extends Controller
         if ($request->hasFile('image')) {
             $data['image'] = $this->uploadFile($request->file('image'),'Blogs');
         }
-        $blog->update($data);
+        unset($data['tag_id']);
+        $update = Blog::update($data);
+        if ($update) {
+            $update->tags()->sync($request->tag_id);
+        }
         return redirect()->back();
     }
     public function uploadFile(UploadedFile $file,$path='Blogs'){

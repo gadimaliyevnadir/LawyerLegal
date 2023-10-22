@@ -66,6 +66,12 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
+                                    <label for="countries">Tags</label>
+                                    <select class="js-example-basic-multiple form-control" name="tag_id[]" multiple="multiple">
+                                         @foreach ($tags as $tag)
+                                        <option value="{{$tag->id}}"> {!! $tag->getTranslation('name', $key) !!}</option>
+                                         @endforeach
+                                    </select>
                                     <div class="form-group">
                                         <label for="exampleInputFile">Image</label>
                                         <div>

@@ -21,6 +21,7 @@ class UpdateRequest extends FormRequest
             'title.*' => 'required|string|min:3',
             'desc' => 'required|array',
             'desc.*' => 'required|string|min:3',
+            'tag_id' => 'required',
             'category_id' => 'numeric',
             'image' => 'image|mimes:jpg,png,jpeg,webp'
         ];
